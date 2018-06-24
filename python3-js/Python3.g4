@@ -866,7 +866,11 @@ POWER_ASSIGN : '**=';
 IDIV_ASSIGN : '//=';
 
 SKIP_
- : ( SPACES | COMMENT | LINE_JOINING ) -> skip
+ : ( SPACES | LINE_JOINING ) -> skip
+ ;
+
+COMMENT_
+ : COMMENT
  ;
 
 UNKNOWN_CHAR
