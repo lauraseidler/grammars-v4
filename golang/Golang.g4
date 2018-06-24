@@ -180,17 +180,17 @@ typeSpec
 //Function     = Signature FunctionBody .
 //FunctionBody = Block .
 functionDecl
-    : 'func' IDENTIFIER ( function | signature )
+    : 'func' IDENTIFIER ( functionNoConflict | signature )
     ;
 
-function
+functionNoConflict
     : signature block
     ;
 
 //MethodDecl   = "func" Receiver MethodName ( Function | Signature ) .
 //Receiver     = Parameters .
 methodDecl
-    : 'func' receiver IDENTIFIER ( function | signature )
+    : 'func' receiver IDENTIFIER ( functionNoConflict | signature )
     ;
 
 receiver
@@ -616,7 +616,7 @@ anonymousField
 
 //FunctionLit = "func" Function .
 functionLit
-    : 'func' function
+    : 'func' functionNoConflict
     ;
 
 //PrimaryExpr =
@@ -1252,5 +1252,5 @@ TERMINATOR
 
 
 LINE_COMMENT
-    :   '//' ~[\r\n]* -> skip
+    :   '//' ~[\r\n]* -> channel(HIDDEN)
     ;
