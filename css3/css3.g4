@@ -193,16 +193,16 @@ term
     | String ws              # knownTerm
     | UnicodeRange ws        # knownTerm
     | ident ws               # knownTerm
-    | var                    # knownTerm
+    | varNoConflict                    # knownTerm
     | Uri ws                 # knownTerm
     | hexcolor               # knownTerm
     | calc                   # knownTerm
-    | function               # knownTerm
+    | functionNoConflict               # knownTerm
     | unknownDimension ws    # unknownTerm
     | dxImageTransform       # badTerm
     ;
 
-function
+functionNoConflict
     : Function ws expr ')' ws
     ;
 
@@ -328,7 +328,7 @@ generalEnclosed
 
 // Variable
 // https://www.w3.org/TR/css-variables-1
-var
+varNoConflict
     : Var ws Variable ws ')' ws
     ;
 
@@ -473,7 +473,7 @@ fragment Nmchar
 // BadComment :
 // BadUri :
 
-Comment 
+Comment
     : '/*' ~'*'* '*'+ ( ~[/*] ~'*'* '*'+ )* '/'
     ;
 
