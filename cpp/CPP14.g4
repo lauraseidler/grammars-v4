@@ -2344,10 +2344,10 @@ Newline
 
 BlockComment
 :
-	'/*' .*? '*/' -> skip
+	'/*' .*? '*/' -> channel(HIDDEN)
 ;
 
 LineComment
 :
-	'//' ~[\r\n]* -> skip
+	'//' ~[\r\n]* -> channel(HIDDEN)
 ;
