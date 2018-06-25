@@ -9,7 +9,7 @@
  *
  * Compiles with ANTLR 4.7, generated lexer/parser for Python 2 target.
  */
- 
+
  grammar Python2;
 
  tokens { INDENT, DEDENT, NEWLINE, ENDMARKER }
@@ -119,7 +119,7 @@
     Python2Lexer.prototype.emitNewline = function () {
         var t = this.createToken(Python2Parser.NEWLINE, 'NEWLINE');
         this._tokens.enq(t);
-    }   
+    }
 
     Python2Lexer.prototype.createToken = function (type_, text="", length=0) {
         var start = this._tokenStartCharIndex;
@@ -129,7 +129,7 @@
                 start, stop);
         t.text = text;
         return t;
-    }  
+    }
 }
 
 // Header included from Python site:
@@ -198,7 +198,7 @@ augassign: ('+=' | '-=' | '*=' | '/=' | '%=' | '&=' | '|=' | '^=' |
 //print_stmt: 'print' ( ( test (',' test)* (',')? )? |
 //                      '>>' test ( (',' test)+ (',')? )? )
 //    ;
-print_stmt: {this._input.LT(1).text=='print'}? 
+print_stmt: {this._input.LT(1).text=='print'}?
             // tt: this change allows print to be treated as a NAME
             //     while preserving the print statement syntax.
             NAME ( ( test (',' test)* (',')? )? |
@@ -377,7 +377,7 @@ encoding_decl: NAME
 
 yield_expr: 'yield' 'from'? (testlist)?
     ;
-    
+
 /*****************************************************************************
  *                               Lexer rules
  *****************************************************************************/
@@ -451,7 +451,7 @@ if (this._tokenStartColumn == 0 && this._openBRCount == 0
 }  -> channel(HIDDEN)
     ;
 
-COMMENT:        '#' ~[\r\n]* -> skip;
+COMMENT:        '#' ~[\r\n]* -> channel(HIDDEN);
 
 OPEN_PAREN:     '(' {this._openBRCount  += 1};
 CLOSE_PAREN:    ')' {this._openBRCount  -= 1};
